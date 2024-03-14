@@ -1,4 +1,5 @@
 ﻿using FlightPlanner.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -14,6 +15,7 @@ namespace FlightPlanner.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // userID after login in

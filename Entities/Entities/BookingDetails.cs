@@ -17,6 +17,6 @@ namespace Entities.Entities
         public int FlightId { get; set; }
 
         [ForeignKey("AspNetUsers")]
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 }

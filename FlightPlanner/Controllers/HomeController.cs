@@ -1,6 +1,7 @@
 ﻿using FlightPlanner.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace FlightPlanner.Controllers
 {
@@ -15,6 +16,11 @@ namespace FlightPlanner.Controllers
 
         public IActionResult Index()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // userID after login in
+            if(userId != null) { 
+                
+
+            }
             return View();
         }
 

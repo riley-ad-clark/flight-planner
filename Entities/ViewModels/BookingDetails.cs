@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.ViewModels
 {
-    internal class BookingDetails
+    public class BookingDetails
     {
     }
 }

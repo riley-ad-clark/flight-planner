@@ -1,6 +1,9 @@
-﻿using FlightPlanner.Models;
+﻿using BLL;
+using Entities.Entities;
+using FlightPlanner.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using System.Security.Claims;
 
@@ -8,6 +11,8 @@ namespace FlightPlanner.Controllers
 {
     public class HomeController : Controller
     {
+        FlightService fs = new FlightService();
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -35,6 +40,21 @@ namespace FlightPlanner.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult GetAirports()
+        {
+            List<Airport> airports = fs.GetAirportsService();
+            var dropdownItems = airports.Select(item => new SelectListItem { Value = item.LocationId.ToString(), Text = $"{item.CityName} | {item.AirportName}" });
+            return Json(dropdownItems);
+        }
+
+        [HttpPost]
+        public IActionResult BookFlight([FromBody] Flight flightFormData)
+        {
+            var response = fs.BookFlightService(flightFormData);
+            return Json(response);
         }
     }
 }

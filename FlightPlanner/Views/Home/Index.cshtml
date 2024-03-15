@@ -2,7 +2,128 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#alertSuccess").hide();
+        $('#alertDanger').hide();
+        GetAirports();
+    })
+
+    function BookFlight() {
+
+        $('#destinationId').val($('#arrivalAirport').val());
+        $('#locationId').val($('#departureAirport').val());
+        
+        var flightObj = {
+            DestinationId: $('#destinationId').val(),
+            LocationId: $('#locationId').val(),
+            NumberOfPassengers: $('#passengerNumber').val(),
+            StartDate: $('#startDate').val(),
+            EndDate: $('#endDate').val()
+        }
+
+        console.log(flightObj);
+
+        $.ajax({
+            url: "/Home/BookFlight",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(flightObj),
+            success: function (response) {
+                console.log(response);
+                if (response == 'success') {
+                    $('#alertSuccess').show()
+                    $('#alertSuccess').text("Flight has been successfully booked!")
+                } else {
+                    $('#alertDanger').show()
+                    $('#alertDanger').text("Some error occured, try again!")
+                }
+            },
+            error: function (errorMessage) {
+                $('#alertDanger').show()
+                $('#alertDanger').text("errorMessage.responseText")
+            }
+        })
+    }
+
+    function GetAirports() {
+        $.ajax({
+            url: "/Home/GetAirports",
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                var dropdown = $('.airportDropdown');
+                dropdown.empty();
+                $.each(response, function (index, item) {
+                    dropdown.append($('<option></option>').attr('value', item.value).text(item.text));
+                });
+            },
+            error: function (error) {
+                alert('Error fetching airports: ' + error);
+            }
+        })
+    }
+
+</script>
+
+<div class="container">
+    <form>
+        <span hidden id="locationId"></span>
+        <select class="airportDropdown form-control form-control-lg" id="departureAirport">
+            <option value="" disabled selected>Departure Airport</option>
+            <option value="">Loading...</option>
+        </select>
+
+        <span hidden id="destinationId"></span>
+        <select class="airportDropdown form-control form-control-lg" id="arrivalAirport">
+            <option value="" disabled selected>Arrival Airport</option>
+            <option value="">Loading...</option>
+        </select>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="date" class="form-control" id="startDate" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="date" class="form-control" id="endDate"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input type="number" class="form-control" id="passengerNumber" value="0" min="0" max="25">
+        </div>
+
+        <center>
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" id="btnAdd" onclick="BookFlight()">Register Student</button>
+                    </div>
+                </div>
+            </div>
+        </center>
+
+        <center>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="alert alert-success" id="alertSuccess"></div>
+                    <div class="alert alert-danger" id="alertDanger"></div>
+                </div>
+            </div>
+        </center>
+    </form>
 </div>

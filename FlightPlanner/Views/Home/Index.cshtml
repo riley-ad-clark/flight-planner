@@ -24,7 +24,8 @@
             LocationId: $('#locationId').val(),
             NumberOfPassengers: $('#passengerNumber').val(),
             StartDate: $('#startDate').val(),
-            EndDate: $('#endDate').val()
+            EndDate: $('#endDate').val(),
+            Id: $('#hiddenUserId').val()
         }
 
         console.log(flightObj);
@@ -92,6 +93,7 @@
 </script>
 
 <div class="container">
+    <input type="hidden" id="hiddenUserId" value="@ViewBag.UserId" />
     <form class="d-flex flex-row align-items-center justify-content-center" style="gap: 15px">
         <span hidden id="locationId"></span>
         <select class="airportDropdown form-control form-control-lg rounded-pill" id="departureAirport" style="width: 250px;">

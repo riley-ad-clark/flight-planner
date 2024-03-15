@@ -25,8 +25,7 @@ namespace FlightPlanner.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // userID after login in
             if(userId != null) { 
-                
-
+                ViewBag.UserId = userId;
             }
             return View();
         }

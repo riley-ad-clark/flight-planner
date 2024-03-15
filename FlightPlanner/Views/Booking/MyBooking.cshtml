@@ -19,9 +19,6 @@
                 $.each(response, function (key, item) {
                     console.log(key);
                     html += '<tr>';
-                    html += '<td>' + item.userName + '</td>';
-                    html += '<td>' + item.email + '</td>';
-                    html += '<td>' + item.phoneNumber + '</td>';
                     html += '<td>' + item.flightId + '</td>';
                     html += '<td>' + item.departure + '</td>';
                     html += '<td>' + item.arrival + '</td>';
@@ -46,9 +43,6 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <td>UserName</td>
-                    <td>Email</td>
-                    <td>PhoneNumber</td>
                     <td>FlightId</td>
                     <td>Departure</td>
                     <td>Arrival</td>

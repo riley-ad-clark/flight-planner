@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Entities;
 using Entities.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 
 namespace DAL
@@ -23,7 +25,8 @@ namespace DAL
 
         public List<UserBookingVW> GetMyBookings(string UserId)
         {
-            var result = flightPlannerContext.Set<UserBookingVW>().FromSqlRaw("Exec usp_GetMyBooking @UserId", UserId).ToList();
+            var courseIdparam = new SqlParameter("@UserId", UserId);
+            var result = flightPlannerContext.Set<UserBookingVW>().FromSqlRaw("Exec usp_GetMyBooking @UserId", courseIdparam).ToList();
             return result;
         }
     }

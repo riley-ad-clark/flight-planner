@@ -1,4 +1,5 @@
 ﻿using Entities.Entities;
+using Entities.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,18 @@ namespace Entities.Context
     {
         public FlightPlannerContext():base()
         { 
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(LocalDb)\MSSQLLocalDB;Database=FlightPlanner;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=FlightPlanner;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
         }
 
         public DbSet<Flight> Flights { get; set; }
         public DbSet<Airport> Airports { get; set; }
         public DbSet<BookingDetails> BookingDetails { get; set; }
+        public DbSet<AspNetUsers> AspNetUsers { get; set;}
+        public DbSet<BookingDetailsVW> BookingDetailsVW { get; set; }
+        public DbSet<UserBookingVW> UserBookingVW { get; set; }
     }
 }

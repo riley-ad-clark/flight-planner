@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\hero-01.jpg" />
+  </ItemGroup>
+
 </Project>

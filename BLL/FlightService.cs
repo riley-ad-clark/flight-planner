@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAL;
+using Entities.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,17 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    internal class FlightService
+    public  class FlightService
     {
+        FlightRepository fr = new FlightRepository();
+        public List<Airport> GetAirportsService()
+        {
+            return fr.GetAirportsRepo();
+        }
+
+        public string BookFlightService(Flight flightFormData)
+        {
+            return fr.BookFlightRepo(flightFormData);
+        }
     }
 }

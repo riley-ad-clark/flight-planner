@@ -37,11 +37,29 @@ namespace FlightPlanner.Controllers
                 return Json(result);
             }
             else {
-                var result = 0;
+                var result = "must be login in";
                 return Json(result);
             }
             
             
+        }
+        [Authorize]
+        [HttpPost]
+        public IActionResult CancelBooking(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId != null)
+            {
+                BookingDetailService bookingDetailService = new BookingDetailService();
+                var result = bookingDetailService.DeleteBooking(id);
+                return Json(result);
+            }
+            else
+            {
+                var result = "must be login in";
+                return Json(result);
+            }
         }
     }
 }

@@ -21,5 +21,9 @@ namespace BLL
             var result = bookingDetailRep.GetMyBookings(UserId);
             return result;
         }
+        public bool DeleteBooking(int id)
+        {
+            return bookingDetailRep.DeleteBooking(id);
+        }
     }
 }

@@ -29,5 +29,17 @@ namespace DAL
             var result = flightPlannerContext.Set<UserBookingVW>().FromSqlRaw("Exec usp_GetMyBooking @UserId", courseIdparam).ToList();
             return result;
         }
+
+        public bool DeleteBooking(int id)
+        {
+            var booking = flightPlannerContext.BookingDetails.Where(x=>x.BookingId== id);
+            if (booking != null)
+            {
+                flightPlannerContext.BookingDetails.RemoveRange(booking);
+                flightPlannerContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

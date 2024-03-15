@@ -24,7 +24,7 @@
                     html += '<td>' + item.arrival + '</td>';
                     html += '<td>' + item.startDate + '</td>';
                     html += '<td>' + item.endDate + '</td>';
-                    html += '<td><a href="#" onClick="return CancelBooking(' + item.BookingId + ')">Cancel</a></td>';
+                    html += '<td><a href="#" onClick="return CancelBooking(' + item.bookingId + ')">Cancel</a></td>';
                     html += '</tr>';
                 });
                 $('.tbody').html(html);
@@ -33,6 +33,24 @@
                 alert(errormessage.responseText);
             }
         });
+    }
+    function CancelBooking(bookingId) {
+        var ans = confirm('Are you sure you want to cancel this booking?');
+        if (ans) {
+            $.ajax({
+                url: "/Booking/CancelBooking/" + bookingId,
+                type: "POST",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (response) {
+                    loadData();
+
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
     }
 </script>
 <main>

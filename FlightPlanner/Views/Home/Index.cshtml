@@ -71,6 +71,24 @@
         })
     }
 
+    function GetFlights() {
+        $.ajax({
+            url: "/Home/GetFlights",
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                $.each(response, function () {
+                    
+                });
+            },
+            error: function (error) {
+                alert('Error fetching airports: ' + error);
+            }
+        })
+    }
+
 </script>
 
 <div class="container">

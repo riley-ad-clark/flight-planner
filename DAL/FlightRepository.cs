@@ -33,5 +33,16 @@ namespace DAL
 
             return "error";
         }
+
+        public List<Flight> GetFlightsRepo()
+        {
+            List<Flight> flights = new List<Flight>();
+            var flightAccess = fpc.Flights;
+            foreach (var flight in flightAccess)
+            {
+                flights.Add(flight);
+            }
+            return flights;
+        }
     }
 }

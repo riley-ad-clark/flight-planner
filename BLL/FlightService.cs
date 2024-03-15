@@ -20,5 +20,10 @@ namespace BLL
         {
             return fr.BookFlightRepo(flightFormData);
         }
+
+        public List<Flight> GetFlightService()
+        {
+            return fr.GetFlightsRepo();
+        }
     }
 }

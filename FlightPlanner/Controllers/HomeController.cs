@@ -20,7 +20,7 @@ namespace FlightPlanner.Controllers
             _logger = logger;
         }
 
-        //[Authorize]
+        [Authorize]
         public IActionResult Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // userID after login in
@@ -55,6 +55,13 @@ namespace FlightPlanner.Controllers
         {
             var response = fs.BookFlightService(flightFormData);
             return Json(response);
+        }
+
+        [HttpGet]
+        public IActionResult GetFlights()
+        {
+            List<Flight> flights = fs.GetFlightService();
+            return Json(flights);
         }
     }
 }

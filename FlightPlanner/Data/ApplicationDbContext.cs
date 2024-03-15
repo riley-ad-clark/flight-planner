@@ -13,7 +13,7 @@ namespace FlightPlanner.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(LocalDb)\MSSQLLocalDB;Database=FlightPlanner;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=FlightPlanner;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
         }
 
         public DbSet<Flight> Flights { get; set; }

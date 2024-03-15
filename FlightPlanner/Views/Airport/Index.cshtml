@@ -3,3 +3,92 @@
 *@
 @{
 }
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<center><h3>Register Airport Destinations</h3></center>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#alertSuccess').hide();
+        $('#alertDanger').hide();
+    })
+
+    function AddAirport() {
+        var airportObj = {
+            CityName: $('#cityname').val(),
+            AirportName: $('#airportname').val()
+        };
+
+        $.ajax({
+            url: '/Airport/AddAirport',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(airportObj),
+            success: function (response) {
+                if (response == true) {
+                    $('#alertSuccess').show();
+                    $('#alertSuccess').text('Destination has been successfully added');
+                }
+                else {
+                    $('#alertDanger').show();
+                    $('#alertDanger').text('Invalid input, please try again');
+                }
+            }
+            error: function (errormessage) {
+                $('#alertDanger').show();
+                $('#alertDanger').text(errormessage.responseText);
+            }
+        })
+    }
+
+</script>
+
+<div class="container">
+
+    <form>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="alert alert-success" id="alertSuccess"></div>
+                <div class="alert alert-danger" id="alertDanger"></div>
+            </div>
+        </div>
+
+        <br/>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="airportname" placeholder="Name of Airport" />
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="cityname" placeholder="City of Airport" />
+                </div>
+            </div>
+        </div>
+
+        <center>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" id="btnAdd" onclick="AddAirport();">Register</button>
+                    </div>
+                </div>
+            </div>
+        </center>
+
+    </form>
+
+
+</div>

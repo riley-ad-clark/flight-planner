@@ -20,11 +20,11 @@ namespace FlightPlanner.Controllers
         {
             var apService = airportService.GetAirportService();
 
-            List<AirportVM> airportVMs = new List<AirportVM>();
+            List<Airport> airportVMs = new List<Airport>();
 
             foreach (Airport ap in apService)
             {
-                airportVMs.Add(new AirportVM
+                airportVMs.Add(new Airport
                 {
                     LocationId = ap.LocationId,
                     CityName = ap.CityName,

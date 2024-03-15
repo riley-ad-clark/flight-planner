@@ -15,7 +15,7 @@ namespace FlightPlanner.Controllers
             _logger = logger;
         }
 
-        [Authorize]
+        //[Authorize]
         public IActionResult Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // userID after login in

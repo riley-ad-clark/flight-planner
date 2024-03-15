@@ -14,6 +14,15 @@ namespace DAL
         FlightPlannerContext flightPlannerContext = new FlightPlannerContext();
 
         /// <summary>
+        /// Method to fetch the airports data from user input and convert to a list
+        /// </summary>
+        /// <returns></returns>
+        public List<Airport> GetAirportsRepository()
+        {
+            return flightPlannerContext.Airports.ToList();
+        }
+
+        /// <summary>
         /// Method if successful adds the user input into our database from the form
         /// </summary>
         /// <param name="airportFormData"></param>

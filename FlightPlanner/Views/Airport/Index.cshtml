@@ -8,14 +8,37 @@
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-<center><h3>Register Airport Destinations</h3></center>
 
 <script type="text/javascript">
 
-    $(document).ready(function() {
+    $(document).ready(function () {
+        LoadData();
         $('#alertSuccess').hide();
         $('#alertDanger').hide();
     })
+
+    function LoadData() {
+        $.ajax({
+            url: '/Airport/GetAirports',
+            type: 'GET',
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (response) {
+                var html = '';
+                $.each(response, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>' + item.CityName + '</td>';
+                    html += '<td>' + item.AirportName + '</td>';
+                    html += '<td><a href="#" onclick= "return getLocationById(' + item.LocationId + ')">Edit Airport</a> | <a href="#" onClick= "deleteProduct(' + item.LocationId + ')"> Delete Airport</a></td>';
+                    html += '</tr>'
+                });
+                $('.tbody').html(html);
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
 
     function AddAirport() {
         var airportObj = {
@@ -29,7 +52,11 @@
             contentType: 'application/json',
             data: JSON.stringify(airportObj),
             success: function (response) {
+
                 if (response == true) {
+                    LoadData();
+                    $('#myModal').modal('hide');
+                    $('.modal-backdrop').remove();
                     $('#alertSuccess').show();
                     $('#alertSuccess').text('Destination has been successfully added');
                 }
@@ -37,53 +64,87 @@
                     $('#alertDanger').show();
                     $('#alertDanger').text('Invalid input, please try again');
                 }
-            }
+            },
             error: function (errormessage) {
                 $('#alertDanger').show();
                 $('#alertDanger').text(errormessage.responseText);
             }
-        })
+        });
+    }
+
+    function clearTextBoxes() {
+        $('#airportname').val("");
+        $('#cityname').val("");
+        $('#btnUpdate').hide();
+        $('#btnAdd').show();
+        $('#errorMessage').text("");
     }
 
 </script>
 
 <div class="container">
 
-    <form>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onclick="clearTextBoxes();">Add Destination</button>
 
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="alert alert-success" id="alertSuccess"></div>
-                <div class="alert alert-danger" id="alertDanger"></div>
+    <center><h2>Airports</h2></center>
+    <br />
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <td>Airport Name</td>
+                <td>City of Airport</td>
+                <td>Edit or Delete</td>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Airport</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+
+                        <input type="hidden" id="locationid" />
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="airportname" placeholder="Name of Airport" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="cityname" placeholder="City of Airport" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <p style="color:blue" id="alertSuccess"></p>
+                        <p style="color:red" id="alertDanger"></p>
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" id="btnAdd" onclick="return AddAirport();">Add</button>
+                    <button type="button" class="btn btn-outline-primary" id="btnUpdate" onclick="update();">Update</button>
+                </div>
+
             </div>
         </div>
-
-        <br/>
-
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="airportname" placeholder="Name of Airport" />
-                </div>
-            </div>
-        </div>
-
-        <br />
-
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="cityname" placeholder="City of Airport" />
-                </div>
-            </div>
-        </div>
-
-                    </div>
-                </div>
-            </div>
-        </center>
-
-    </form>
-
+    </div>
 
 </div>

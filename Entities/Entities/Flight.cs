@@ -18,6 +18,9 @@ namespace Entities.Entities
         [ForeignKey("Airport")]
         public int LocationId { get; set; }
 
+        [ForeignKey("AspNetUsers")]
+        public string Id { get; set; }
+
         public int NumberOfPassengers { get; set; }
 
         public DateTime StartDate { get; set; }

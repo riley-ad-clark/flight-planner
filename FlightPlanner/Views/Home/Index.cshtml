@@ -1,80 +1,113 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
 
-<script type="text/javascript">
+        $(document).ready(function () {
+            $("#alertSuccess").hide();
+            $('#alertDanger').hide();
+            GetAirports();
+            GetFlights();
+        })
 
-    $(document).ready(function () {
-        $("#alertSuccess").hide();
-        $('#alertDanger').hide();
-        GetAirports();
-    })
+        function BookFlight() {
 
-    function BookFlight() {
-
-        $('#destinationId').val($('#arrivalAirport').val());
-        $('#locationId').val($('#departureAirport').val());
+            $('#destinationId').val($('#arrivalAirport').val());
+            $('#locationId').val($('#departureAirport').val());
         
-        var flightObj = {
-            DestinationId: $('#destinationId').val(),
-            LocationId: $('#locationId').val(),
-            NumberOfPassengers: $('#passengerNumber').val(),
-            StartDate: $('#startDate').val(),
-            EndDate: $('#endDate').val()
+            var flightObj = {
+                DestinationId: $('#destinationId').val(),
+                LocationId: $('#locationId').val(),
+                NumberOfPassengers: $('#passengerNumber').val(),
+                StartDate: $('#startDate').val(),
+                EndDate: $('#endDate').val(),
+                Id: $('#hiddenUserId').val()
+            }
+
+            console.log(flightObj);
+
+            $.ajax({
+                url: "/Home/BookFlight",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(flightObj),
+                success: function (response) {
+                    console.log(response);
+                    if (response == 'success') {
+                        GetFlights();
+                        $('#alertSuccess').show()
+                    } else 
+                    {
+                        GetFlights();
+                        $('#alertDanger').show()
+                        $('#alertDanger').text("Some error occured, try again!")
+                    }
+                },
+                error: function (errorMessage) {
+                    $('#alertDanger').show()
+                    $('#alertDanger').text("errorMessage.responseText")
+                }
+            })
         }
 
-        console.log(flightObj);
-
-        $.ajax({
-            url: "/Home/BookFlight",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(flightObj),
-            success: function (response) {
-                console.log(response);
-                if (response == 'success') {
-                    $('#alertSuccess').show()
-                    $('#alertSuccess').text("Flight has been successfully booked!")
-                } else {
-                    $('#alertDanger').show()
-                    $('#alertDanger').text("Some error occured, try again!")
+        function GetAirports() {
+            $.ajax({
+                url: "/Home/GetAirports",
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    var dropdown = $('.airportDropdown');
+                    dropdown.empty();
+                    $.each(response, function (index, item) {
+                        dropdown.append($('<option></option>').attr('value', item.value).text(item.text));
+                    });
+                },
+                error: function (error) {
+                    alert('Error fetching airports: ' + error);
                 }
-            },
-            error: function (errorMessage) {
-                $('#alertDanger').show()
-                $('#alertDanger').text("errorMessage.responseText")
-            }
-        })
-    }
+            })
+        }
 
-    function GetAirports() {
-        $.ajax({
-            url: "/Home/GetAirports",
-            type: "GET",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (response) {
-                console.log(response);
-                var dropdown = $('.airportDropdown');
-                dropdown.empty();
-                $.each(response, function (index, item) {
-                    dropdown.append($('<option></option>').attr('value', item.value).text(item.text));
-                });
-            },
-            error: function (error) {
-                alert('Error fetching airports: ' + error);
-            }
-        })
-    }
+        function GetFlights() {
+            $.ajax({
+                url: "/Home/GetFlights",
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    var html = '';
+                    $.each(response, function (key, item) {
+                        console.log(response);
+                        html += '<tr>';
+                        html += '<td>' + item.departure + '</td>';
+                        html += '<td>' + item.arrival + '</td>';
+                        html += '<td>' + item.departureDate + '</td>';
+                        html += '<td>' + item.arrivalDate + '</td>';
+                        html += '</tr>';
+                    });
+                    $('.tbody').html(html);
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            })
+        }
 
-</script>
+    </script>
+</head>
 
 <div class="container">
-    <form class="d-flex flex-row align-items-center justify-content-center" style="gap: 15px">
+    <input type="hidden" id="hiddenUserId" value="@ViewBag.UserId" />
+    <form class="d-flex flex-row align-items-center justify-content-center" style="gap: 15px;">
         <span hidden id="locationId"></span>
         <select class="airportDropdown form-control form-control-lg rounded-pill" id="departureAirport" style="width: 250px;">
             <option value="" disabled selected>Departure Airport</option>
@@ -96,10 +129,27 @@
         </div>
 
         <button type="button" class="btn btn-primary rounded-pill btn-lg" style="height: 100%;" id="btnAdd" onclick="BookFlight()">Book It!</button>
+        <i class="fa-solid fa-square-check" id="alertSuccess" style="font-size: 60px; color: #fcba03"></i>
     </form>
     <div class="col-md-6">
-        <div class="alert alert-success" id="alertSuccess"></div>
         <div class="alert alert-danger" id="alertDanger"></div>
+    </div>
+
+    <div class="table-holder justify-content-center align-items-center">
+        <center><h3>Upcoming flights</h3></center>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td>Departure</td>
+                    <td>Arrival</td>
+                    <td>Departure Date</td>
+                    <td>Arrival Date</td>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                @*Booking records will to populated here*@
+            </tbody>
+        </table>
     </div>
 </div>
 

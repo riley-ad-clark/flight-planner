@@ -24,12 +24,13 @@
             contentType: 'application/json',
             dataType: 'json',
             success: function (response) {
+                console.log(response);
                 var html = '';
                 $.each(response, function (key, item) {
                     html += '<tr>';
-                    html += '<td>' + item.CityName + '</td>';
-                    html += '<td>' + item.AirportName + '</td>';
-                    html += '<td><a href="#" onclick= "return getLocationById(' + item.LocationId + ')">Edit Airport</a> | <a href="#" onClick= "deleteProduct(' + item.LocationId + ')"> Delete Airport</a></td>';
+                    html += '<td>' + item.cityName + '</td>';
+                    html += '<td>' + item.airportName + '</td>';
+                    html += '<td><a href="#" onclick= "return getLocationById(' + item.locationId + ')">Edit Airport</a> | <a href="#" onClick= "deleteProduct(' + item.locationId + ')"> Delete Airport</a></td>';
                     html += '</tr>'
                 });
                 $('.tbody').html(html);
@@ -91,8 +92,8 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
+                <td>City Name</td>
                 <td>Airport Name</td>
-                <td>City of Airport</td>
                 <td>Edit or Delete</td>
             </tr>
         </thead>

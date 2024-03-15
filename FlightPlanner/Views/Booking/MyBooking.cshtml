@@ -9,7 +9,7 @@
     })
     function loadData() {
         $.ajax({
-            url: "/Booking/GetBookingList",
+            url: "/Booking/GetMyBooking",
             type: "GET",
             contentType: "application/json",
             dataType: "",
@@ -27,7 +27,7 @@
                     html += '<td>' + item.arrival + '</td>';
                     html += '<td>' + item.startDate + '</td>';
                     html += '<td>' + item.endDate + '</td>';
-                    
+                    html += '<td><a href="#" onClick="return CancelBooking(' + item.BookingId + ')">Cancel</a></td>';
                     html += '</tr>';
                 });
                 $('.tbody').html(html);
@@ -39,7 +39,7 @@
     }
 </script>
 <main>
-    
+
 
     <div class="row">
 
@@ -54,6 +54,7 @@
                     <td>Arrival</td>
                     <td>Departure Time</td>
                     <td>Arrival Time</td>
+                    <td>Action</td>
                 </tr>
             </thead>
             <tbody class="tbody">

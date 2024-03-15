@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Entities.Context;
+using Entities.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
 using Entities.ViewModels;
-using Entities.Context;
-using Entities.Entities;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace DAL
 {
@@ -15,10 +17,14 @@ namespace DAL
         FlightPlannerContext flightPlannerContext = new FlightPlannerContext();
         public List<BookingDetailsVW> GetBookingDetails()
         {
-            List<BookingDetailsVW> bookingDetails = new List<BookingDetailsVW>();
-            List<Airport> airports = new List<Airport>();
-            airports = flightPlannerContext.Airports.ToList();
-            return bookingDetails;
+            var result = flightPlannerContext.Set<BookingDetailsVW>().FromSqlRaw("Exec usp_GetBookingINfo").ToList();
+            return result;
+        }
+
+        public List<UserBookingVW> GetMyBookings(string UserId)
+        {
+            var result = flightPlannerContext.Set<UserBookingVW>().FromSqlRaw("Exec usp_GetMyBooking @UserId", UserId).ToList();
+            return result;
         }
     }
 }

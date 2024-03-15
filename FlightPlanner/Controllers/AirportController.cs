@@ -1,8 +1,12 @@
 ﻿using BLL;
 using DAL;
-using FlightPlanner.Models;
-using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
+using FlightPlanner.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Entities.Entities;
+using Entities.ViewModels; 
+using System.Collections.Generic; 
 
 
 namespace FlightPlanner.Controllers
@@ -18,17 +22,16 @@ namespace FlightPlanner.Controllers
         [HttpGet]
         public IActionResult GetAirports()
         {
-            var apService = airportService.GetAirportService();
+            var airportList = airportService.GetAirportService();
+            var airportVMs = new List<AirportVM>();
 
-            List<Airport> airportVMs = new List<Airport>();
-
-            foreach (Airport ap in apService)
+            foreach (var airport in airportList)
             {
-                airportVMs.Add(new Airport
+                airportVMs.Add(new AirportVM
                 {
-                    LocationId = ap.LocationId,
-                    CityName = ap.CityName,
-                    AirportName = ap.AirportName
+                    LocationId = airport.LocationId,
+                    CityName = airport.CityName,
+                    AirportName = airport.AirportName
                 });
             }
 
@@ -40,6 +43,22 @@ namespace FlightPlanner.Controllers
         {
             var response = airportService.AddAirportService(airportFormData);
             return Json(response);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteAirport(int locationId)
+        {
+            var response = airportService.DeleteAirportService(locationId);
+
+            if (response)
+            {
+                return Json(response);
+            }
+            else
+            {
+                var errorMessage = "Failed to delete airport.";
+                return Json(errorMessage);
+            }
         }
     }
 }

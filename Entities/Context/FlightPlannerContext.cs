@@ -22,6 +22,7 @@ namespace Entities.Context
 
         public DbSet<Flight> Flights { get; set; }
         public DbSet<Airport> Airports { get; set; }
+        public DbSet<AirportVM> AirportVM { get; set; }
         public DbSet<BookingDetails> BookingDetails { get; set; }
         public DbSet<AspNetUsers> AspNetUsers { get; set;}
         public DbSet<BookingDetailsVW> BookingDetailsVW { get; set; }

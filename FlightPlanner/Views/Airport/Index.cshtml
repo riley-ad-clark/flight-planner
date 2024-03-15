@@ -12,14 +12,14 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        LoadData();
+        loadData();
         $('#alertSuccess').hide();
         $('#alertDanger').hide();
     })
 
-    function LoadData() {
+    function loadData() {
         $.ajax({
-            url: '/Airport/GetAirports',
+            url: '/Airport/GetAirports/',
             type: 'GET',
             contentType: 'application/json',
             dataType: 'json',
@@ -30,7 +30,7 @@
                     html += '<tr>';
                     html += '<td>' + item.cityName + '</td>';
                     html += '<td>' + item.airportName + '</td>';
-                    html += '<td><a href="#" onclick= "return getLocationById(' + item.locationId + ')">Edit Airport</a> | <a href="#" onClick= "deleteProduct(' + item.locationId + ')"> Delete Airport</a></td>';
+                    html += '<td><a href="#" onclick= "return getLocationById(' + item.locationId + ')">Edit Airport</a> | <a href="#" onclick= "deleteAirport(' + item.locationId + ')"> Delete Airport</a></td>';
                     html += '</tr>'
                 });
                 $('.tbody').html(html);
@@ -41,35 +41,60 @@
         });
     }
 
-    function AddAirport() {
+    function addAirport() {
         var airportObj = {
             CityName: $('#cityname').val(),
-            AirportName: $('#airportname').val()
+            AirportName: $('#airportname').val().toUpperCase()
         };
 
+        if (!isAirportNameValid(airportObj.AirportName) && !isAirportCityValid(airportObj.CityName)) {
+            $('#alertDanger').text('Invalid input. Example: Winnipeg (City), YYG (Airport)');
+            return;
+        }
+
         $.ajax({
-            url: '/Airport/AddAirport',
+            url: '/Airport/AddAirport/',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(airportObj),
             success: function (response) {
-
+                
                 if (response == true) {
-                    LoadData();
+                    loadData();
                     $('#myModal').modal('hide');
                     $('.modal-backdrop').remove();
                     $('#alertSuccess').show();
                     $('#alertSuccess').text('Destination has been successfully added');
                 }
                 else {
+                    $('#alertDanger').show();
                     $('#alertDanger').text('Invalid input, please try again');
                 }
             },
             error: function (errormessage) {
-                $('#alertDanger').show();
-                $('#alertDanger').text(errormessage.responseText);
+                alert(errormessage.responseText);
             }
         });
+    }
+
+    function deleteAirport(locationId) {
+        var ans = confirm('Are you sure you want to delete this?');
+        if (ans) {
+            $.ajax({
+                url: '/Airport/DeleteAirport/',
+                data: JSON.stringify({ locationId: locationId }),
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (response) {
+                    console.log("Success callback executed!");
+                    loadData();
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText)
+                }
+            });
+        }
     }
 
     function clearTextBoxes() {
@@ -79,6 +104,17 @@
         $('#btnAdd').show();
         $('#errorMessage').text("");
     }
+
+    function isAirportNameValid(value){
+        var airportLocation = /^[A-Za-z]{3}$/;
+        return airportLocation.test(value);
+    }
+
+    function isAirportCityValid(value){
+        var airportName = /^[A-Za-z]+$/;
+        return airportName.test(value);
+    }
+ 
 
 </script>
 
@@ -139,12 +175,11 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" id="btnAdd" onclick="return AddAirport();">Add</button>
+                    <button type="button" class="btn btn-outline-primary" id="btnAdd" onclick="return addAirport();">Add</button>
                     <button type="button" class="btn btn-outline-primary" id="btnUpdate" onclick="update();">Update</button>
                 </div>
 
             </div>
         </div>
     </div>
-
 </div>

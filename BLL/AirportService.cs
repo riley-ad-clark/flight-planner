@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DAL;
+using Entities.Context;
+using Entities.Entities;
+using Entities.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
-using Entities.Entities;
 
 namespace BLL
 {
@@ -21,9 +23,14 @@ namespace BLL
         /// <summary>
         /// Takes the airportRepository method to add the user input from the form and add it into the database
         /// </summary>
-        public string AddAirportService(Airport airportFormData)
+        public bool AddAirportService(Airport airportFormData)
         {
             return airportRepository.AddAirportRepository(airportFormData);
+        }
+
+        public bool DeleteAirportService(int locationId)
+        {
+            return airportRepository.DeleteAirportRepository(locationId);
         }
     }
 }

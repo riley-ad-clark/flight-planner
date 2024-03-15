@@ -27,15 +27,27 @@ namespace DAL
         /// </summary>
         /// <param name="airportFormData"></param>
         /// <returns></returns>
-        public string AddAirportRepository(Airport airportFormData)
+        public bool AddAirportRepository(Airport airportFormData)
         {
             if (airportFormData != null)
             {
                 flightPlannerContext.Airports.Add(airportFormData);
                 flightPlannerContext.SaveChanges();
-                return "Success";
+                return true;
             }
-            return "error";
+            return false;
+        }
+
+        public bool DeleteAirportRepository(int locationId)
+        {
+            var airport = flightPlannerContext.Airports.Where(x => x.LocationId == locationId).FirstOrDefault();
+            if (airport != null)
+            {
+                flightPlannerContext.Airports.Remove(airport);
+                flightPlannerContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

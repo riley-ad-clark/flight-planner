@@ -25,5 +25,10 @@ namespace BLL
         {
             return fr.GetFlightsRepo();
         }
+
+        public Airport GetAirportByIdService(int givenId)
+        {
+            return fr.GetAirportByIdRepo(givenId);
+        }
     }
 }

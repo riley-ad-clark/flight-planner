@@ -59,7 +59,26 @@ namespace FlightPlanner.Controllers
         [HttpGet]
         public IActionResult GetFlights()
         {
-            List<Flight> flights = fs.GetFlightService();
+            List<FlightVM> flights = new List<FlightVM>();
+
+            List<Flight> flightsAccess = fs.GetFlightService();
+            foreach (Flight flight in flightsAccess) 
+            {
+                var departure = fs.GetAirportByIdService(flight.LocationId);
+                var arrival = fs.GetAirportByIdService(flight.DestinationId);
+
+                FlightVM listedFlight = new FlightVM
+                {
+                    FlightId = flight.FlightId,
+                    Departure = departure.CityName + " | " + departure.AirportName,
+                    Arrival = arrival.CityName + " | " + departure.AirportName,
+                    DepartureDate = flight.StartDate,
+                    ArrivalDate = flight.EndDate
+                };
+
+                flights.Add(listedFlight);
+            }
+
             return Json(flights);
         }
     }

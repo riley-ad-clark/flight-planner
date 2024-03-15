@@ -44,5 +44,11 @@ namespace DAL
             }
             return flights;
         }
+
+        public Airport GetAirportByIdRepo(int givenId)
+        {
+            return fpc.Airports.FirstOrDefault(x => x.LocationId == givenId);
+        }
+
     }
 }

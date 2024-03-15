@@ -20,13 +20,12 @@ namespace FlightPlanner.Controllers
             _logger = logger;
         }
 
-        //[Authorize]
+        [Authorize]
         public IActionResult Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // userID after login in
             if(userId != null) { 
-                
-
+                ViewBag.UserId = userId;
             }
             return View();
         }
@@ -55,6 +54,32 @@ namespace FlightPlanner.Controllers
         {
             var response = fs.BookFlightService(flightFormData);
             return Json(response);
+        }
+
+        [HttpGet]
+        public IActionResult GetFlights()
+        {
+            List<FlightVM> flights = new List<FlightVM>();
+
+            List<Flight> flightsAccess = fs.GetFlightService();
+            foreach (Flight flight in flightsAccess) 
+            {
+                var departure = fs.GetAirportByIdService(flight.LocationId);
+                var arrival = fs.GetAirportByIdService(flight.DestinationId);
+
+                FlightVM listedFlight = new FlightVM
+                {
+                    FlightId = flight.FlightId,
+                    Departure = departure.CityName + " | " + departure.AirportName,
+                    Arrival = arrival.CityName + " | " + departure.AirportName,
+                    DepartureDate = flight.StartDate,
+                    ArrivalDate = flight.EndDate
+                };
+
+                flights.Add(listedFlight);
+            }
+
+            return Json(flights);
         }
     }
 }

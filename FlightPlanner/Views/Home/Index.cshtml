@@ -74,56 +74,32 @@
 </script>
 
 <div class="container">
-    <form>
+    <form class="d-flex flex-row align-items-center justify-content-center" style="gap: 15px">
         <span hidden id="locationId"></span>
-        <select class="airportDropdown form-control form-control-lg" id="departureAirport">
+        <select class="airportDropdown form-control form-control-lg rounded-pill" id="departureAirport" style="width: 250px;">
             <option value="" disabled selected>Departure Airport</option>
             <option value="">Loading...</option>
         </select>
 
         <span hidden id="destinationId"></span>
-        <select class="airportDropdown form-control form-control-lg" id="arrivalAirport">
+        <select class="airportDropdown form-control form-control-lg rounded-pill" id="arrivalAirport" style="width: 250px;">
             <option value="" disabled selected>Arrival Airport</option>
             <option value="">Loading...</option>
         </select>
 
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input type="date" class="form-control" id="startDate" />
-                </div>
-            </div>
+        <input type="date" class="form-control form-control-lg rounded-pill" id="startDate" style="width: 200px;" />
+
+        <input type="date" class="form-control form-control-lg rounded-pill" id="endDate" style="width: 200px;" />
+
+        <div class="input-group" style="width: 100px;">
+            <input type="number" class="form-control form-control-lg rounded-pill" id="passengerNumber" value="0" min="0" max="25">
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input type="date" class="form-control" id="endDate"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <input type="number" class="form-control" id="passengerNumber" value="0" min="0" max="25">
-        </div>
-
-        <center>
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary" id="btnAdd" onclick="BookFlight()">Register Student</button>
-                    </div>
-                </div>
-            </div>
-        </center>
-
-        <center>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="alert alert-success" id="alertSuccess"></div>
-                    <div class="alert alert-danger" id="alertDanger"></div>
-                </div>
-            </div>
-        </center>
+        <button type="button" class="btn btn-primary rounded-pill btn-lg" style="height: 100%;" id="btnAdd" onclick="BookFlight()">Book It!</button>
     </form>
+    <div class="col-md-6">
+        <div class="alert alert-success" id="alertSuccess"></div>
+        <div class="alert alert-danger" id="alertDanger"></div>
+    </div>
 </div>
+

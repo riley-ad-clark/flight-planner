@@ -20,12 +20,22 @@ namespace BLL
             return airportRepository.GetAirportsRepository();
         }
 
+        public Airport GetAirportByIdService(int locationId)
+        {
+            return airportRepository.GetAirportByIdRepository(locationId);
+        }
+
         /// <summary>
         /// Takes the airportRepository method to add the user input from the form and add it into the database
         /// </summary>
         public bool AddAirportService(Airport airportFormData)
         {
             return airportRepository.AddAirportRepository(airportFormData);
+        }
+
+        public bool UpdateAirportService(Airport airportFormData)
+        {
+            return airportRepository.UpdateAirportRepository(airportFormData);
         }
 
         public bool DeleteAirportService(int locationId)

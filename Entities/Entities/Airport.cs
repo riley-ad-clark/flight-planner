@@ -13,10 +13,10 @@ namespace Entities.Entities
         [Key]
         public int LocationId { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string CityName { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string AirportName { get; set; }
     }
 }

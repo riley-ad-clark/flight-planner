@@ -1,12 +1,12 @@
 ﻿using BLL;
-using DAL;
-using Microsoft.AspNetCore.Mvc;
-using FlightPlanner.Models;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
 using Entities.Entities;
-using Entities.ViewModels; 
-using System.Collections.Generic; 
+using Entities.ViewModels;
+using FlightPlanner.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Diagnostics;
+using System.Security.Claims;
 
 
 namespace FlightPlanner.Controllers
@@ -23,7 +23,8 @@ namespace FlightPlanner.Controllers
         public IActionResult GetAirports()
         {
             var airportList = airportService.GetAirportService();
-            var airportVMs = new List<AirportVM>();
+
+            List<AirportVM> airportVMs = new List<AirportVM>();
 
             foreach (var airport in airportList)
             {
@@ -36,6 +37,20 @@ namespace FlightPlanner.Controllers
             }
 
             return Json(airportVMs);
+        }
+
+        [HttpGet]
+        public IActionResult GetAirportById(int locationId)
+        {
+            var airport = airportService.GetAirportByIdService(locationId);
+            return Json(airport);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAirport([FromBody] Airport airportFormData)
+        {
+            var update = airportService.UpdateAirportService(airportFormData);
+            return Json(update);
         }
 
         [HttpPost]

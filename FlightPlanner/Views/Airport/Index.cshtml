@@ -126,10 +126,11 @@
     }
 
     function deleteAirport(locationId) {
+
         var ans = confirm('Are you sure you want to delete this?');
         if (ans) {
             $.ajax({
-                url: '/Airport/DeleteAirport',
+                url: '/Airport/DeleteAirport/',
                 data: { locationId: locationId },
                 type: 'POST',
                 contentType: 'application/json',

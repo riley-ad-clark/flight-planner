@@ -1,8 +1,12 @@
 ﻿using BLL;
-using DAL;
-using FlightPlanner.Models;
 using Entities.Entities;
+using Entities.ViewModels;
+using FlightPlanner.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Diagnostics;
+using System.Security.Claims;
 
 
 namespace FlightPlanner.Controllers
@@ -18,21 +22,35 @@ namespace FlightPlanner.Controllers
         [HttpGet]
         public IActionResult GetAirports()
         {
-            var apService = airportService.GetAirportService();
+            var airportList = airportService.GetAirportService();
 
-            List<Airport> airportVMs = new List<Airport>();
+            List<AirportVM> airportVMs = new List<AirportVM>();
 
-            foreach (Airport ap in apService)
+            foreach (var airport in airportList)
             {
-                airportVMs.Add(new Airport
+                airportVMs.Add(new AirportVM
                 {
-                    LocationId = ap.LocationId,
-                    CityName = ap.CityName,
-                    AirportName = ap.AirportName
+                    LocationId = airport.LocationId,
+                    CityName = airport.CityName,
+                    AirportName = airport.AirportName
                 });
             }
 
             return Json(airportVMs);
+        }
+
+        [HttpGet]
+        public IActionResult GetAirportById(int locationId)
+        {
+            var airport = airportService.GetAirportByIdService(locationId);
+            return Json(airport);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAirport([FromBody] Airport airportFormData)
+        {
+            var update = airportService.UpdateAirportService(airportFormData);
+            return Json(update);
         }
 
         [HttpPost]
@@ -40,6 +58,22 @@ namespace FlightPlanner.Controllers
         {
             var response = airportService.AddAirportService(airportFormData);
             return Json(response);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteAirport(int locationId)
+        {
+            var response = airportService.DeleteAirportService(locationId);
+
+            if (response)
+            {
+                return Json(response);
+            }
+            else
+            {
+                var errorMessage = "Failed to delete airport.";
+                return Json(errorMessage);
+            }
         }
     }
 }

@@ -61,9 +61,9 @@ namespace FlightPlanner.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteAirport(int id)
+        public IActionResult DeleteAirport(int locationId)
         {
-            var response = airportService.DeleteAirportService(id);
+            var response = airportService.DeleteAirportService(locationId);
 
             if (response)
             {

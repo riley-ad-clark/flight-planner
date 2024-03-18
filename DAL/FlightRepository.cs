@@ -28,6 +28,13 @@ namespace DAL
             {
                 fpc.Flights.Add(flightFormData);
                 fpc.SaveChanges();
+                var newFlightKey = flightFormData.FlightId;
+                fpc.BookingDetails.Add(new BookingDetails
+                {
+                    Id= flightFormData.Id,
+                    FlightId= newFlightKey
+                });
+                fpc.SaveChanges() ;
                 return "success";
             }
 

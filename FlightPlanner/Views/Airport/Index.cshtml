@@ -95,8 +95,9 @@
             AirportName: $('#airportname').val().toUpperCase()
         };
 
-        if (!isAirportNameValid(airportObj.AirportName) && !isAirportCityValid(airportObj.CityName)) {
-            $('#alertDanger').text('Invalid input. Example: Winnipeg (City), YYG (Airport)');
+        if (!isAirportNameValid(airportObj.AirportName) || !isAirportCityValid(airportObj.CityName)) {
+            $('#alertDanger').show();
+            $('#alertDanger').text('Invalid input. Please try again');
             return;
         }
 
@@ -120,7 +121,7 @@
                 }
             },
             error: function (errormessage) {
-                alert(errormessage.responseText);
+                alert('Error occurred: '+ errormessage.responseText);
             }
         });
     }
@@ -136,7 +137,6 @@
                 contentType: 'application/json',
                 dataType: 'json',
                 success: function (response) {
-                    console.log("Success callback executed!");
                     loadData();
                 },
                 error: function (errormessage) {

@@ -57,5 +57,45 @@ namespace DAL
             return fpc.Airports.FirstOrDefault(x => x.LocationId == givenId);
         }
 
+        public Flight GetFlightByIdRepo(int givenId)
+        {
+            return fpc.Flights.Where(x => x.FlightId == givenId).FirstOrDefault();
+        }
+
+        public bool UpdateFlight(Flight flight)
+        {
+            if(flight != null)
+            {
+                Flight result = fpc.Flights.Where(x => x.FlightId == flight.FlightId).FirstOrDefault();
+                if(result != null) 
+                {
+                    result.DestinationId = flight.DestinationId;
+                    result.LocationId = flight.LocationId;
+                    result.StartDate = flight.StartDate;
+                    result.EndDate= flight.EndDate;
+                    fpc.SaveChanges();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool DeleteFlight(int id)
+        {
+            var flight = fpc.Flights.Where(x => x.FlightId == id).FirstOrDefault();
+            var booking = fpc.BookingDetails.Where(x => x.Id == flight.Id);
+            if (flight != null)
+            {
+                fpc.Flights.RemoveRange(flight);
+                if (booking != null)
+                {
+                    fpc.BookingDetails.RemoveRange(booking);
+                }
+                fpc.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
     }
 }

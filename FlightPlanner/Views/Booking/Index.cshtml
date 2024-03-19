@@ -18,15 +18,18 @@
                 var html = '';
                 $.each(response, function (key, item) {
                     console.log(key);
+                    startDate = item.startDate;
+                    startDate = startDate.substr(0, 10);
+                    endDate = item.endDate;
+                    endDate = endDate.substr(0, 10);
                     html += '<tr>';
                     html += '<td>' + item.userName + '</td>';
                     html += '<td>' + item.email + '</td>';
-                    html += '<td>' + item.phoneNumber + '</td>';
                     html += '<td>' + item.flightId + '</td>';
                     html += '<td>' + item.departure + '</td>';
                     html += '<td>' + item.arrival + '</td>';
-                    html += '<td>' + item.startDate + '</td>';
-                    html += '<td>' + item.endDate + '</td>';
+                    html += '<td>' + startDate + '</td>';
+                    html += '<td>' + endDate + '</td>';
                     
                     html += '</tr>';
                 });
@@ -40,13 +43,15 @@
 </script>
 <main>
     <center>
+        <br />
+        <center><h2 class="airport-heading2">Booking List</h2></center>
+        <br />
         <div class="row container"> 
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <td>UserName</td>
                         <td>Email</td>
-                        <td>PhoneNumber</td>
                         <td>FlightId</td>
                         <td>Departure</td>
                         <td>Arrival</td>

@@ -48,7 +48,7 @@
                     html += '<td>' + item.arrival + '</td>';
                     html += '<td>' + item.departureDate + '</td>';
                     html += '<td>' + item.arrivalDate + '</td>';
-                    html += '<td><a href="#" onclick= "return getFlightById(' + item.flightId + ')">Edit Flight</a> | <a href="#" onclick= "deleteFlght(' + item.flightId + ')"> Delete Flight</a></td>';
+                    html += '<td><a href="#" onclick= "return getFlightById(' + item.flightId + ')">Edit</a> | <a href="#" onclick= "deleteFlght(' + item.flightId + ')"> Delete</a></td>';
                     html += '</tr>';
                 });
                 $('.tbody').html(html);
@@ -132,7 +132,7 @@
 </script>
 <div class="container" style="margin-top: 30px;">
     <div class="table-holder justify-content-center align-items-center">
-        <center><h3>Manage Flights</h3></center>
+        <center><h3 class="airport-heading2">Manage Flights</h3></center>
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>

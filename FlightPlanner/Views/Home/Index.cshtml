@@ -31,29 +31,29 @@
             }
 
             console.log(flightObj);
-
-            $.ajax({
-                url: "/Home/BookFlight",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(flightObj),
-                success: function (response) {
-                    console.log(response);
-                    if (response == 'success') {
-                        GetFlights();
-                        $('#alertSuccess').show()
-                    } else 
-                    {
-                        GetFlights();
+            if (ValidateData() != false) {
+                $.ajax({
+                    url: "/Home/BookFlight",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(flightObj),
+                    success: function (response) {
+                        console.log(response);
+                        if (response == 'success') {
+                            GetFlights();
+                            $('#alertSuccess').show()
+                        } else {
+                            GetFlights();
+                            $('#alertDanger').show()
+                            $('#alertDanger').text("Some error occured, try again!")
+                        }
+                    },
+                    error: function (errorMessage) {
                         $('#alertDanger').show()
-                        $('#alertDanger').text("Some error occured, try again!")
+                        $('#alertDanger').text("errorMessage.responseText")
                     }
-                },
-                error: function (errorMessage) {
-                    $('#alertDanger').show()
-                    $('#alertDanger').text("errorMessage.responseText")
-                }
-            })
+                })
+            }   
         }
 
         function GetAirports() {
@@ -65,10 +65,14 @@
                 success: function (response) {
                     console.log(response);
                     var dropdown = $('.airportDropdown');
+                    var dropdownDeparture = $('.dropdownDeparture')
+                    var dropdownArrival = $('.dropdownArrival')
                     dropdown.empty();
                     $.each(response, function (index, item) {
                         dropdown.append($('<option></option>').attr('value', item.value).text(item.text));
                     });
+                    dropdownDeparture.append($('<option value="" disabled selected> Departure Airport </option>'));
+                    dropdownArrival.append($('<option value="" disabled selected> Arrival Airport </option>'));
                 },
                 error: function (error) {
                     alert('Error fetching airports: ' + error);
@@ -102,7 +106,60 @@
             })
         }
 
+        function ValidateData() {
+            var flightObj = {
+                DestinationId: $('#destinationId').val(),
+                LocationId: $('#locationId').val(),
+                NumberOfPassengers: $('#passengerNumber').val(),
+                StartDate: $('#startDate').val(),
+                EndDate: $('#endDate').val(),
+                Id: $('#hiddenUserId').val()
+            }
+            console.log(flightObj);
+            console.log('inside validatedata');
+            if (flightObj.DestinationId == "" | flightObj.LocationId == "") {
+                $('#alertDanger').show();
+                $('#alertDanger').text("Please select a valid departure, and arrival location");
+                return false;
+            } else if (flightObj.StartDate == "" | flightObj.EndDate == "") {
+                $('#alertDanger').show()
+                $('#alertDanger').text("Please ensure that you have set valid dates")
+                return false;
+            } else if (flightObj.DestinationId == flightObj.LocationId) {
+                $('#alertDanger').show()
+                $('#alertDanger').text("Please select two different departure, and arrival locations")
+                return false;
+            } else if (flightObj.StartDate > flightObj.EndDate) {
+                $('#alertDanger').show()
+                $('#alertDanger').text("Please select a departure date that occurs before your arrival")
+                return false;
+            } else if (flightObj.NumberOfPassengers > 25) {
+                flightObj.NumberOfPassengers = 25;
+                return false;
+            } else if (flightObj.NumberOfPassengers < 1) {
+                flightObj.NumberOfPassengers = 1;
+                return false;
+            } else {
+                return true;
+            }
+        }
+
     </script>
+    <style>
+         @@keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            visibility: visible;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
 </head>
 
     <div class="photo-background-container" style="position: relative; width: 100%; height: 500px; overflow: hidden;">
@@ -113,12 +170,12 @@
             <input type="hidden" id="hiddenUserId" value="@ViewBag.UserId" />
             <form class="d-flex flex-row align-items-center justify-content-center" style="gap: 15px;">
                 <span hidden id="locationId"></span>
-                <select class="airportDropdown form-control form-control-lg rounded-pill" id="departureAirport" style="width: 250px;">
+            <select class="airportDropdown dropdownDeparture form-control form-control-lg rounded-pill" id="departureAirport" style="width: 250px;">
                     <option value="" disabled selected>Departure Airport</option>
                 </select>
                     <i class="fa-solid fa-arrow-right" style="font-size: 25px; color: #fff;"></i>
                 <span hidden id="destinationId"></span>
-                <select class="airportDropdown form-control form-control-lg rounded-pill" id="arrivalAirport" style="width: 250px;">
+                <select class="airportDropdown dropdownArrival form-control form-control-lg rounded-pill" id="arrivalAirport" style="width: 250px;">
                     <option value="" disabled selected>Arrival Airport</option>
                 </select>
 
@@ -129,15 +186,17 @@
                 <input type="date" class="form-control form-control-lg rounded-pill" id="endDate" style="width: 200px;"/>
 
                 <div class="input-group" style="width: 100px;">
-                    <input type="number" class="form-control form-control-lg rounded-pill" id="passengerNumber" value="0" min="0" max="25">
+                    <input type="number" class="form-control form-control-lg rounded-pill" id="passengerNumber" value="1" min="1" max="25">
                 </div>
 
                 <button type="button" class="btn btn-primary rounded-pill btn-lg" style="height: 100%;" id="btnAdd" onclick="BookFlight()">Book It!</button>
                 <i class="fa-solid fa-square-check" id="alertSuccess" style="font-size: 60px; color: #fcba03"></i>
             </form>
-            <div class="col-md-6">
-                <div class="alert alert-danger" id="alertDanger"></div>
-            </div>
+            <center>
+                <div class="col-md-6">
+                    <div class="alert alert-danger" id="alertDanger" style="margin-top: 50px;"></div>
+                </div>
+            </center>
         </div>
     </div>
 

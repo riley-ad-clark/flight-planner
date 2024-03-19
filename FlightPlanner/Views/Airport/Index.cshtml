@@ -15,6 +15,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="airport-body">
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -168,16 +169,17 @@
         }
 
         function isAirportCityValid(value) {
-            var airportName = /^[A-Za-z]+$/;
+            var airportName = /^[A-Za-z\s]+$/;
             return airportName.test(value);
         }
     </script>
+
     <main>
         <div class="container">
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onclick="clearTextBoxes();">Add Destination</button>
-
             <center><h2 class="airport-heading2">List of Airports</h2></center>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onclick="clearTextBoxes();">Add Destination</button>
+            <br/>
             <br />
             <table class="table table-bordered table-hover">
                 <thead>

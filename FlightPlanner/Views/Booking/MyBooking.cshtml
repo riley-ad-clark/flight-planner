@@ -17,13 +17,17 @@
                 console.log(response);
                 var html = '';
                 $.each(response, function (key, item) {
-                    console.log(key);
+                   // console.log(key);
+                    startDate = item.startDate;
+                    startDate = startDate.substr(0, 10);
+                    endDate = item.endDate;
+                    endDate = endDate.substr(0, 10);
                     html += '<tr>';
                     html += '<td>' + item.flightId + '</td>';
                     html += '<td>' + item.departure + '</td>';
                     html += '<td>' + item.arrival + '</td>';
-                    html += '<td>' + item.startDate + '</td>';
-                    html += '<td>' + item.endDate + '</td>';
+                    html += '<td>' + startDate + '</td>';
+                    html += '<td>' + endDate + '</td>';
                     html += '<td><a href="#" onClick="return CancelBooking(' + item.bookingId + ')">Cancel</a></td>';
                     html += '</tr>';
                 });
@@ -55,6 +59,9 @@
 </script>
 <main>
     <center>
+        <br />
+        <center><h2 class="airport-heading2">My Booking</h2></center>
+        <br />
         <div class="row container">
 
             <table class="table table-bordered table-hover">

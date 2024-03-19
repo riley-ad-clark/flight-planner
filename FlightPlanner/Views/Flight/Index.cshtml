@@ -1,0 +1,100 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#alertSuccess").hide();
+        $('#alertDanger').hide();
+        GetAirports();
+        GetFlights();
+    })
+
+    function GetAirports() {
+        $.ajax({
+            url: "/Home/GetAirports",
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                var dropdown = $('.airportDropdown');
+                dropdown.empty();
+                $.each(response, function (index, item) {
+                    dropdown.append($('<option></option>').attr('value', item.value).text(item.text));
+                });
+            },
+            error: function (error) {
+                alert('Error fetching airports: ' + error);
+            }
+        })
+    }
+
+    function GetFlights() {
+        $.ajax({
+            url: "/Home/GetFlights",
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                var html = '';
+                $.each(response, function (key, item) {
+                    console.log(response);
+                    html += '<tr>';
+                    html += '<td>' + item.departure + '</td>';
+                    html += '<td>' + item.arrival + '</td>';
+                    html += '<td>' + item.departureDate + '</td>';
+                    html += '<td>' + item.arrivalDate + '</td>';
+                    html += '<td><a href="#" onclick= "return getFlightById(' + item.FlightId + ')">Edit Flight</a> | <a href="#" onclick= "deleteFlght(' + item.FlightId + ')"> Delete Flight</a></td>';
+                    html += '</tr>';
+                });
+                $('.tbody').html(html);
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        })
+    }
+    function getFlightById(FlightId) {
+        $.ajax({
+            url: '/Flight/GetFlightById/' + FlightId,
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (response) {
+                $('#locationid').val(response.locationId);
+                $('#cityname').val(response.cityName);
+                $('#airportname').val(response.airportName);
+
+                $('#myModal').modal('show');
+                $('#btnUpdate').show();
+                $('#btnAdd').hide();
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        })
+    }
+
+</script>
+<div class="container" style="margin-top: 30px;">
+    <div class="table-holder justify-content-center align-items-center">
+        <center><h3>Manage Flights</h3></center>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td>Departure</td>
+                    <td>Arrival</td>
+                    <td>Departure Date</td>
+                    <td>Arrival Date</td
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                @*Booking records will to populated here*@
+            </tbody>
+        </table>
+    </div>
+</div>

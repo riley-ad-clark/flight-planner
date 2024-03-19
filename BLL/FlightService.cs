@@ -30,5 +30,18 @@ namespace BLL
         {
             return fr.GetAirportByIdRepo(givenId);
         }
+        public Flight GetFlightByIdService(int givenId)
+        {
+            return fr.GetFlightByIdRepo(givenId);
+        }
+        public bool UpdateFlight(Flight flight)
+        {
+            return fr.UpdateFlight(flight);
+        }
+
+        public bool DeleteFlight(int id) 
+        {
+            return fr.DeleteFlight(id);
+        }
     }
 }

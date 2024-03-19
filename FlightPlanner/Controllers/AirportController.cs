@@ -19,6 +19,7 @@ namespace FlightPlanner.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetAirports()
         {
@@ -39,6 +40,7 @@ namespace FlightPlanner.Controllers
             return Json(airportVMs);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetAirportById(int locationId)
         {
@@ -46,6 +48,7 @@ namespace FlightPlanner.Controllers
             return Json(airport);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult UpdateAirport([FromBody] Airport airportFormData)
         {
@@ -53,6 +56,7 @@ namespace FlightPlanner.Controllers
             return Json(update);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult AddAirport([FromBody] Airport airportFormData)
         {
@@ -60,6 +64,7 @@ namespace FlightPlanner.Controllers
             return Json(response);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult DeleteAirport(int locationId)
         {

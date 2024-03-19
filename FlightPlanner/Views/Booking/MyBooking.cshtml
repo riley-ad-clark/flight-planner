@@ -3,6 +3,8 @@
 *@
 @{
 }
+<link rel="stylesheet" href="~/css/booking.css" type="text/css" media="all" />
+
 <script type="text/javascript">
     $(document).ready(function () {
         loadData();
@@ -57,7 +59,7 @@
         }
     }
 </script>
-<main>
+@* <main>
     <center>
         <br />
         <center><h2 class="airport-heading2">My Booking</h2></center>
@@ -76,9 +78,40 @@
                     </tr>
                 </thead>
                 <tbody class="tbody">
-                    @*Booking records will to populated here*@
+                    
                 </tbody>
             </table>
         </div>
     </center>
+</main> *@
+<main>
+    <div class="photo-background-container">
+        <div class="overlay"></div>
+        <img class="background-image" src="~/images/my-bookings-hero.jpg">
+        <div class="inner-container">
+            <h1>My Bookings</h1>
+        </div>
+    </div>
+
+    <div class="container flight-data-container">
+        <div class="table-holder justify-content-center align-items-center">
+            <center>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td>Flight ID</td>
+                            <td>Departure Airport</td>
+                            <td>Arrival Airport</td>
+                            <td>Departure Time</td>
+                            <td>Arrival Time</td>
+                            <td>Action(s)</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        @*Booking records will to populated here*@
+                    </tbody>
+                </table>
+            </center>
+        </div>
+    </div>
 </main>

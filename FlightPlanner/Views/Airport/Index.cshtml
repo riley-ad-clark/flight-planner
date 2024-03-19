@@ -13,8 +13,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="~/css/booking.css" type="text/css" media="all" />
 </head>
-<body class="airport-body">
 
     <script type="text/javascript">
 
@@ -175,25 +175,33 @@
     </script>
 
     <main>
+            <div class="photo-background-container">
+                <div class="overlay"></div>
+                <img class="background-image" src="~/images/Airplane.jpg">
+                <div class="inner-container">
+                    <h1>Registered Airports</h1>
+                </div>
+            </div>
         <div class="container">
-
-            <br />
-            <center><h2 class="airport-heading2">List of Airports</h2></center>
-            <br />
+            <div class="container flight-data-container">
+                <div class="table-holder justify-content-center align-items-center">
+                    <center>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td>City Name</td>
+                                    <td>Airport Name</td>
+                                    <td>Edit</td>
+                                    <td>Delete</td>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                            </tbody>
+                        </table>
+                    </center>
+                </div>
+            </div>
             
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <td>City Name</td>
-                        <td>Airport Name</td>
-                        <td>Edit</td>
-                        <td>Delete</td>
-                    </tr>
-                </thead>
-                <tbody class="tbody">
-                </tbody>
-            </table>
-
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -245,5 +253,4 @@
            
         </div>
     </main>
-</body>
 </html>

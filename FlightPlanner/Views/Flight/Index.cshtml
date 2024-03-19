@@ -3,6 +3,9 @@
 *@
 @{
 }
+
+<link rel="stylesheet" href="~/css/booking.css" type="text/css" media="all" />
+
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -134,25 +137,37 @@
     }
 
 </script>
-<div class="container" style="margin-top: 30px;">
-    <div class="table-holder justify-content-center align-items-center">
-        <center><h3 class="airport-heading2">Manage Flights</h3></center>
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <td>Departure</td>
-                    <td>Arrival</td>
-                    <td>Departure Date</td>
-                    <td>Arrival Date</td>
-                    <td>Actions</td>
-                </tr>
-            </thead>
-            <tbody class="tbody">
-                @*Booking records will to populated here*@
-            </tbody>
-        </table>
+<main>
+    <div class="photo-background-container">
+        <div class="overlay"></div>
+        <img class="background-image" src="~/images/global-flights-hero.jpg">
+        <div class="inner-container">
+            <h1>Global Flights</h1>
+        </div>
     </div>
-</div>
+    <div class="container" style="margin-top: 30px;">
+        <div class="container flight-data-container">
+            <div class="table-holder justify-content-center align-items-center">
+                <center>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td>Departure</td>
+                                <td>Arrival</td>
+                                <td>Departure Date</td>
+                                <td>Arrival Date</td>
+                                <td>Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            @*Booking records will to populated here*@
+                        </tbody>
+                    </table>
+                </center>
+            </div>
+        </div>
+    </div>
+</main>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

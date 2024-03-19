@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+﻿/*@charset "utf-8";
 
 * {
     margin: 0;
@@ -17,17 +17,17 @@
 .airport-heading2{
     color: #fff;
     font-size: 30px;
-}
-
+}*/
+/*
 .airport-body {
     background-image: linear-gradient(to left, rgb(0 0 0 / 0.4), rgb(0 0 0 / 0.2)), url('/images/Airplane.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-color: #eee;
-}
+}*/
 
-.airport-body table.table thead tr td {
+/*.airport-body table.table thead tr td {
     font-size: 22px; 
     background-color: #f5f5f5; 
     color: #333; 
@@ -42,4 +42,4 @@
 
 .airport-body table.table tbody tr:nth-child(odd) {
     background-color: #f0f0f0; 
-}
+}*/

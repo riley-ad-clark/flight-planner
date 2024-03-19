@@ -3,6 +3,9 @@
 *@
 @{
 }
+<link rel="stylesheet" href="~/css/booking.css" type="text/css" media="all" />
+
+
 <script type="text/javascript">
     $(document).ready(function () {
         loadData();
@@ -23,7 +26,6 @@
                     endDate = item.endDate;
                     endDate = endDate.substr(0, 10);
                     html += '<tr>';
-                    html += '<td>' + item.userName + '</td>';
                     html += '<td>' + item.email + '</td>';
                     html += '<td>' + item.flightId + '</td>';
                     html += '<td>' + item.departure + '</td>';
@@ -42,27 +44,34 @@
     }
 </script>
 <main>
-    <center>
-        <br />
-        <center><h2 class="airport-heading2">Booking List</h2></center>
-        <br />
-        <div class="row container"> 
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <td>UserName</td>
-                        <td>Email</td>
-                        <td>FlightId</td>
-                        <td>Departure</td>
-                        <td>Arrival</td>
-                        <td>Departure Time</td>
-                        <td>Arrival Time</td>
-                    </tr>
-                </thead>
-                <tbody class="tbody">
-                    @*Booking records will to populated here*@
-                </tbody>
-            </table>
-        </div>
-    </center>
+            <div class="photo-background-container">
+                <div class="overlay"></div>
+                <img class="background-image" src="~/images/global-booking-hero.jpg">
+                <div class="inner-container">
+                    <h1>Global Bookings</h1>
+                </div>
+            </div>
+
+            <div class="container flight-data-container">
+                <div class="table-holder justify-content-center align-items-center">
+                    <center>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>Flight ID</td>
+                                    <td>Departure Airport</td>
+                                    <td>Arrival Airport</td>
+                                    <td>Departure Time</td>
+                                    <td>Arrival Time</td>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                @*Booking records will to populated here*@
+                            </tbody>
+                        </table>
+                    </center>
+                </div>
+            </div>
 </main>

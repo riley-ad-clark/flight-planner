@@ -11,7 +11,7 @@
 
 <center>
     <div class="container">
-        <h1>@ViewData["Title"]</h1>
+        <h1 style="color: #000; font-size: 50px; margin-top: 50px">@ViewData["Title"]</h1>
         <center>
             <div>
                 <div class="col-md-4">
@@ -24,7 +24,7 @@
                                 <label asp-for="Input.Email" class="form-label"></label>
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
-                            <div class="form-floating">
+                            <div class="form-floating" style="margin-top: 15px;">
                                 <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
                                 <label asp-for="Input.Password" class="form-label"></label>
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>

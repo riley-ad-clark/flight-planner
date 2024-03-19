@@ -3,6 +3,7 @@
 *@
 @{
 }
+<link rel="stylesheet" type="text/css" href="~/css/airport.css">
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -134,26 +135,27 @@
     }
 
 </script>
-<div class="container" style="margin-top: 30px;">
-    <div class="table-holder justify-content-center align-items-center">
-        <center><h3 class="airport-heading2">Manage Flights</h3></center>
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <td>Departure</td>
-                    <td>Arrival</td>
-                    <td>Departure Date</td>
-                    <td>Arrival Date</td>
-                    <td>Actions</td>
-                </tr>
-            </thead>
-            <tbody class="tbody">
-                @*Booking records will to populated here*@
-            </tbody>
-        </table>
+<main class="airport-body">
+    <div class="container" style="margin-top: 30px;">
+        <div class="table-holder justify-content-center align-items-center">
+            <center><h3 class="airport-heading2">Manage Flights</h3></center>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td>Departure</td>
+                        <td>Arrival</td>
+                        <td>Departure Date</td>
+                        <td>Arrival Date</td>
+                        <td>Actions</td>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    @*Booking records will to populated here*@
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
 
@@ -218,3 +220,4 @@
                     </div>
                 </div>
             </div>
+</main>

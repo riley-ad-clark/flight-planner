@@ -19,6 +19,7 @@ namespace FlightPlanner.Controllers
 
             return View();
         }
+        [Authorize]
         public IActionResult GetBookingList()
         {
             BookingDetailService bookingDetailService = new BookingDetailService();

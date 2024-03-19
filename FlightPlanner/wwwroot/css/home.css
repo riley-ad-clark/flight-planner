@@ -122,3 +122,20 @@ h1 {
     height: 100%;
     width: 110px;
 }
+
+.airport-body table.table thead tr td {
+    font-size: 22px;
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 10px;
+}
+
+.airport-body table.table {
+    background-color: #f5f5f5;
+    color: #000;
+    font-size: 17px;
+}
+
+.airport-body table.table tbody tr:nth-child(odd) {
+    background-color: #f0f0f0;
+}

@@ -1,6 +1,6 @@
 ![image](https://github.com/riley-ad-clark/flight-planner/assets/144390085/f589228d-e69a-4dec-a0d0-21a4778e5910)
 # Welcome to SkyBooking!
-This is the first of many full-stack projects developed by myself, <a href="https://github.com/Joseph-Wil">Joseph Terrado</a> and <a href="https://github.com/xiaofang82">Xiaofang Yang</a>!
+This is the first of many full-stack projects developed by myself, <a href="https://github.com/Joseph-Wil" target="_blank">Joseph Terrado</a> and <a href="https://github.com/xiaofang82" target="_blank">Xiaofang Yang</a>!
 
 ## Work Distribution
  - All members: Initial product design, database migration

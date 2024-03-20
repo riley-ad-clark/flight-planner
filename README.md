@@ -25,3 +25,7 @@ The following steps are meant to ensure the user experience is as seamless as po
 <div align="center">Open Control Panel > Uninstall a program > Locate 'Microsoft Visual Studio Installer' > Right click > Select change</div>
 &nbsp;
 <div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/01b341d2-e202-4d88-832b-a2bcc7a9a95a" height="50%" width="50%"></div>
+&nbsp;
+<div align="center">Select modify > Tick the "ASP.NET and web development" box > see "Individual Components" > Select all boxes > Install </div>
+&nbsp;
+<div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/3b0eba64-0a7a-449a-8240-66dc14bda17f"height="75%" width="75%"></div>

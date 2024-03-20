@@ -116,7 +116,11 @@ function ValidateData() {
         $('#alertDanger').show()
         $('#alertDanger').text("Please select two different departure, and arrival locations")
         return false;
-    } else if (flightObj.StartDate == "" | flightObj.EndDate == "") {
+    } else if (flightObj.StartDate < Date.now | flightObj.EndDate < Date.now){
+        $('#alertDanger').show()
+        $('#alertDanger').text("You cannnot time travel with our services...")
+        return false;
+    } else if(flightObj.StartDate == "" | flightObj.EndDate == "") {
         $('#alertDanger').show()
         $('#alertDanger').text("Please ensure that you have set valid dates")
         return false;

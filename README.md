@@ -18,9 +18,10 @@ As with other projects, this web app requires a bit of set up to get started, se
 ## Setup
 The following steps are meant to ensure the user experience is as seamless as possible, if there are any errors, or missing steps you have encountered that _are not_ covered, please submit a pull request!
 
-- I) Ensure that Visual Studio has the correct components installed, to do so, follow the steps below, use image as reference.
-  <br>
-  Assuming a **Windows** machine is being used:
-  <br>
-  Open Control Panel > Uninstall a program > Locate 'Microsoft Visual Studio Installer' > Right click > Select change
-![image](https://github.com/riley-ad-clark/flight-planner/assets/144390085/01b341d2-e202-4d88-832b-a2bcc7a9a95a)
+- **I) Ensure that Visual Studio has the correct components installed. To do so, follow the steps below:**
+&nbsp;
+<div align="center">Assuming a <b>Windows</b> machine is being used:</div>
+&nbsp;
+<div align="center">Open Control Panel > Uninstall a program > Locate 'Microsoft Visual Studio Installer' > Right click > Select change</div>
+&nbsp;
+<div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/01b341d2-e202-4d88-832b-a2bcc7a9a95a" height="50%" width="50%"></div>

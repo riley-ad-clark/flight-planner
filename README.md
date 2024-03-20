@@ -75,6 +75,7 @@ If you would like to see your database update in real time, following these step
 </div>
 
 ## Application Instructions
-As of March 20th, 2024, this application is seem as an "admin view", meaning you have access to anything an administrator would have access to (I.E, CRUD operations for vital information for the application), there is a plan on the way to implement a seperate user view, so stay tuned ;)
-&nbsp;
-To use this application, browse around! There is plenty to do, and we always welcome you to test, and report back with any bugs you may find.
+<br>
+<div align="center">As of March 20th, 2024, this application is an "admin view", meaning you have access to anything an administrator would have access to (I.E, CRUD operations for vital information for the application), there is a plan on the way to implement a seperate user view, so stay tuned ;)</div>
+<br>
+<div align="center">To use this application, browse around! Add some fictional airports, book some flights, delete whatever you may like! There is plenty to do, and we always welcome you to test, and report back with any bugs you may find.</div>

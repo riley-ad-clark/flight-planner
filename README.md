@@ -50,10 +50,26 @@ The following steps are meant to ensure the user experience is as seamless as po
 - **V) Enter the following code in the console:**
 &nbsp;
 <div align="center"><code>PM> add-migration migration01 -Context ApplicationDbContext</code></div>
+&nbsp;
+<div align="center">Once the build has succeeded, enter the following:</div>
+&nbsp;
+<div align="center"><code>PM> Update-Database –Verbose -Context ApplicationDbContext</code></div>
+&nbsp;
 <div align="center">In short, this project uses a "code first" approach in terms of data storage. In doing so, we must manually connect to our local database, this is what the code above does.</div>
+&nbsp;
 
+## On the subject of databases...
 
+If you would like to see your database update in real time, following these steps:
 
+- **I) Open SQL Server Management Studio, and enter the following information once prompted to connect to a DB:**
+&nbsp;
+<div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/eb33b3e9-dd78-47a0-9989-a9e7c6cecafb" height="75%" width="75%"></div>
+&nbsp;
+<div align="center">This will connect you to the previously mentioned database that we initialized earlier!</div>
+&nbsp;
 
-
-
+- **II) Once connected, open the folders found in the image below to access your tables!**
+&nbsp;
+<div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/42571e7a-b504-403d-bd8e-063054826b8f" height="25%" width="25%"></div>
+</div>

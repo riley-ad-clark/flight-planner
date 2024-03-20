@@ -73,3 +73,8 @@ If you would like to see your database update in real time, following these step
 &nbsp;
 <div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/42571e7a-b504-403d-bd8e-063054826b8f" height="25%" width="25%"></div>
 </div>
+
+## Application Instructions
+As of March 20th, 2024, this application is seem as an "admin view", meaning you have access to anything an administrator would have access to (I.E, CRUD operations for vital information for the application), there is a plan on the way to implement a seperate user view, so stay tuned ;)
+&nbsp;
+To use this application, browse around! There is plenty to do, and we always welcome you to test, and report back with any bugs you may find.

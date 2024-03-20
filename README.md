@@ -26,6 +26,34 @@ The following steps are meant to ensure the user experience is as seamless as po
 &nbsp;
 <div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/01b341d2-e202-4d88-832b-a2bcc7a9a95a" height="50%" width="50%"></div>
 &nbsp;
-<div align="center">Select modify > Tick the "ASP.NET and web development" box > see "Individual Components" > Select all boxes > Install </div>
+<div align="center">Select "Modify" > Tick the "ASP.NET and web development" box > see "Individual Components" > Select all boxes > Install </div>
 &nbsp;
-<div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/3b0eba64-0a7a-449a-8240-66dc14bda17f"height="75%" width="75%"></div>
+<div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/3b0eba64-0a7a-449a-8240-66dc14bda17f" height="75%" width="75%"></div>
+&nbsp;
+
+- **II) Launch Visual Studio, and select "Clone a repository", and paste the link to this GitHub repo in the "Repository Location" section**
+<div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/dbb8ac0c-c784-434a-83fd-4fd3ee673371" height="75%" width="75%"></div>
+</div>
+&nbsp;
+
+- **III) Once loaded, double click "FlightPlanner.sln" (found in the solution explorer on the right) and ensure you can see the following screen:**
+<div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/2da2d43a-601c-45eb-993a-cd242f72b929" height="75%" width="75%"></div>
+&nbsp;
+
+- **IV) From this screen, select the following:**
+&nbsp;
+<div align="center">Tools (from the top menu) > NuGet Package Manager > Package Manager Console, this should open a new console</div>
+&nbsp;
+<div align="center"><img src="https://github.com/riley-ad-clark/flight-planner/assets/144390085/9a1681aa-6cc3-401d-a97b-32e40cd3463e" height="75%" width="75%"></div>
+&nbsp;
+
+- **V) Enter the following code in the console:**
+&nbsp;
+<div align="center"><code>PM> add-migration migration01 -Context ApplicationDbContext</code></div>
+<div align="center">In short, this project uses a "code first" approach in terms of data storage. In doing so, we must manually connect to our local database, this is what the code above does.</div>
+
+
+
+
+
+

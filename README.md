@@ -2,6 +2,18 @@
 # Welcome to SkyBooking!
 This is the first of many full-stack projects developed by myself, <a href="https://github.com/Joseph-Wil" target="_blank">Joseph Terrado</a> and <a href="https://github.com/xiaofang82" target="_blank">Xiaofang Yang</a>!
 
+## Skills Used
+  <p align="center">
+    <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" alt="JavaScript">
+    <img src="https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white" alt="C#">
+    <img src="https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white" alt="Microsoft SQL Server">
+    <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
+    <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
+    <img src="https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white">
+    <img src="https://img.shields.io/badge/.NET_core-5C2D91?style=for-the-badge&logo=.net&logoColor=white" alt=".NET">
+    <img src="https://img.shields.io/badge/Entity_Framework-%237F00FF.svg?style=for-the-badge&logo=.net&logoColor=white">
+  </p>
+
 ## Work Distribution
  - All members: Initial product design, database migration
  - Riley: Home page functionality, and all other pages body design
